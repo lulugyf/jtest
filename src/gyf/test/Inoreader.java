@@ -45,7 +45,7 @@ public class Inoreader {
 	private HttpClientContext context;
 	private CloseableHttpClient httpclient;
 	private CookieStore cookieStore;
-	private String cookie_file = "cookies.obj";
+	private String cookie_file = "tmp/cookies.obj";
 	private DefaultCookieSpec cookieSpec = new DefaultCookieSpec();
 
 	public static void main(String[] args) throws Exception {
@@ -231,6 +231,8 @@ public class Inoreader {
 			log("saveResp failed, request failed with:"+resp.getStatusLine());
 			return;
 		}
+		if(!fname.startsWith("tmp/"))
+			fname = "tmp/"+fname;
 		OutputStream fw = new FileOutputStream(fname);
 		String ctype = resp.getFirstHeader("Content-Type").getValue();
 		if(ctype.indexOf("application/json") > 0 && !fname.endsWith(".json"))

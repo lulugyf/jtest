@@ -13,6 +13,8 @@ import org.apache.http.util.CharArrayBuffer;
 
 public class Utils {
 	public static String fileToString(String fname, String charset) throws Exception {
+		if(!fname.startsWith("tmp/"))
+			fname = "tmp/"+fname;
 		InputStream instream = new FileInputStream(fname);
 		if(charset == null)
 			charset = "UTF-8";
@@ -27,6 +29,8 @@ public class Utils {
 	}
 	
 	public static void stringToFile(String fname, String content, String charset) throws Exception {
+		if(!fname.startsWith("tmp/"))
+			fname = "tmp/"+fname;
 		final OutputStream outstream = new FileOutputStream(fname);
 		try {
 			if(charset == null)
